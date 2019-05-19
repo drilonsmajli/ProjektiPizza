@@ -10,9 +10,8 @@ public class UserMapper {
         }
 
         UserTransport userTransport = new UserTransport();
-        userTransport.setId(user.getId());
-        userTransport.setName(user.getName());
-        userTransport.setSurname(user.getSurname());
+        userTransport.setFullName(user.getFullName());
+        userTransport.setUsername(user.getUsername());
         userTransport.setCreditCard(user.getCreditCard());
         userTransport.setPayment(user.getPayment());
         userTransport.setPassword(user.getPassword());
@@ -26,13 +25,11 @@ public class UserMapper {
         }
 
         User user1 = new User();
-        user1.setId(user.getId());
-        user1.setName(user.getName());
+        user1.setFullName(user.getFullName());
+        user1.setUsername(user.getUsername());
         user1.setPassword(user.getPassword());
-        user1.setSurname(user.getSurname());
         user1.setCreditCard(user.getCreditCard());
         user1.setPayment(user.getPayment());
-
         return user1;
     }
 }

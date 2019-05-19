@@ -38,10 +38,9 @@ public class PaymentService {
                         }
                         card.setBalance(card.getBalance()-p.getPrice());
                         for(UserTransport userTransport:userService.getAll()){
-                            user.setId(userTransport.getId());
-                            user.setName(userTransport.getName());
+                            user.setFullName(userTransport.getFullName());
+                            user.setUsername(userTransport.getUsername());
                             user.setPassword(userTransport.getPassword());
-                            user.setSurname(userTransport.getSurname());
                             user.setPayment(userTransport.getPayment());
                             userTransport.getCreditCard().add(creditCard);
                             user.setCreditCard(userTransport.getCreditCard());
