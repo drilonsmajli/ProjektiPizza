@@ -38,26 +38,28 @@ public class PaymentService {
                         }
                         card.setBalance(card.getBalance()-p.getPrice());
                         for(UserTransport userTransport:userService.getAll()){
-                            user.setFullName(userTransport.getFullName());
-                            user.setUsername(userTransport.getUsername());
-                            user.setPassword(userTransport.getPassword());
-                            user.setPayment(userTransport.getPayment());
-                            userTransport.getCreditCard().add(creditCard);
-                            user.setCreditCard(userTransport.getCreditCard());
-                            creditCard.setNrCc(creditCardTransport.getNrCc());
-                            creditCard.setId(creditCardTransport.getId());
-                            creditCard.setCcv(creditCardTransport.getCcv());
-                            creditCard.setExpDd(creditCardTransport.getExpDd());
-                            creditCard.setBalance(creditCardTransport.getBalance());
-                            creditCard.setPayment(creditCardTransport.getPayment());
-                            creditCard.setUser(user);
-                            payment.setId(payment.getId());
-                            payment.setStatus(true);
-                            payment.getPizza().add(p);
-                            p.setPayment(payment);
-                            payment.setCreditCard(creditCard);
-                            payment.setUser(user);
-                            return paymentRepository.save(payment);
+                            if (userTransport.getCreditCard().equals(card)) {
+                                user.setFullName(userTransport.getFullName());
+                                user.setUsername(userTransport.getUsername());
+                                user.setPassword(userTransport.getPassword());
+                                user.setPayment(userTransport.getPayment());
+                                userTransport.getCreditCard().add(creditCard);
+                                user.setCreditCard(userTransport.getCreditCard());
+                                creditCard.setNrCc(creditCardTransport.getNrCc());
+                                creditCard.setId(creditCardTransport.getId());
+                                creditCard.setCcv(creditCardTransport.getCcv());
+                                creditCard.setExpDd(creditCardTransport.getExpDd());
+                                creditCard.setBalance(creditCardTransport.getBalance());
+                                creditCard.setPayment(creditCardTransport.getPayment());
+                                creditCard.setUser(user);
+                                payment.setId(payment.getId());
+                                payment.setStatus(true);
+                                payment.getPizza().add(p);
+                                p.setPayment(payment);
+                                payment.setCreditCard(creditCard);
+                                payment.setUser(user);
+                                return paymentRepository.save(payment);
+                            }
                         }
                     }
                 }
