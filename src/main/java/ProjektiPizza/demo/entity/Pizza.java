@@ -1,6 +1,7 @@
 package ProjektiPizza.demo.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 /**
@@ -11,7 +12,6 @@ public class Pizza {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-
     private String type;
     private double price;
     private double size;

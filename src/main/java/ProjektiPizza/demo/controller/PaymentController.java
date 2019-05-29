@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/payment")
 public class PaymentController {
-
     @Autowired
     private PaymentService paymentService;
-     @GetMapping("/{payWith}/{id}")
+
+    @GetMapping("/{payWith}/{id}")
     public Payment getPaymentStatus(String payWith, @RequestBody CreditCard card,@PathVariable long id) throws Exception {
         return paymentService.getPaymentStatus(payWith,card,id);
     }

@@ -1,7 +1,6 @@
 package ProjektiPizza.demo.mapper;
 
 import ProjektiPizza.demo.entity.CreditCard;
-import ProjektiPizza.demo.exception.CreditCardException;
 import ProjektiPizza.demo.transport.CreditCardTransport;
 
 public class CreditCardMapper {
@@ -23,18 +22,18 @@ public class CreditCardMapper {
         return  creditCardTransport;
     }
 
-    public static CreditCard toEntity(CreditCard creditCard){
-        if(creditCard == null){
+    public static CreditCard toEntity(CreditCardTransport creditCardTransport) {
+        if (creditCardTransport == null) {
             return null;
         }
-        CreditCard creditCard1=new CreditCard();
-        creditCard1.setId(creditCard.getId());
-        creditCard1.setNrCc(creditCard.getNrCc());
-        creditCard1.setExpDd(creditCard.getExpDd());
-        creditCard1.setCcv(creditCard.getCcv());
-        creditCard1.setBalance(creditCard.getBalance());
-        creditCard1.setPayment(creditCard.getPayment());
-        creditCard1.setUser(creditCard.getUser());
+        CreditCard creditCard = new CreditCard();
+        creditCard.setId(creditCardTransport.getId());
+        creditCard.setNrCc(creditCardTransport.getNrCc());
+        creditCard.setExpDd(creditCardTransport.getExpDd());
+        creditCard.setCcv(creditCardTransport.getCcv());
+        creditCard.setBalance(creditCardTransport.getBalance());
+        creditCard.setPayment(creditCardTransport.getPayment());
+        creditCard.setUser(creditCardTransport.getUser());
 
         return creditCard;
     }

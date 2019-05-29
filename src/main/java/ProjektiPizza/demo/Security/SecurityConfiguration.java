@@ -9,14 +9,13 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-
     @Autowired
     UserRepository userRepository;
 
@@ -24,28 +23,26 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(
             AuthenticationManagerBuilder auth) throws Exception {
         auth
-                .userDetailsService(new UserDetailsService() {
-                    @Override
-                    public UserDetails loadUserByUsername(String username)
-                            throws UsernameNotFoundException {
-                        UserDetails userDetails = userRepository.getOne(username);
-                        if (userDetails != null) {
-                            return userDetails;
-                        }
-                        throw new UsernameNotFoundException("User '" + username + "' not found.");
+                .userDetailsService(username -> {
+                    UserDetails userDetails = userRepository.getOne(username);
+                    if (userDetails != null) {
+                        return userDetails;
                     }
+                    throw new UsernameNotFoundException("User '" + username + "' not found.");
                 });
-    }
-
-    @Bean
-    public static NoOpPasswordEncoder passwordEncoder() {//?
-        return (NoOpPasswordEncoder) NoOpPasswordEncoder.getInstance();
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();//?
         http.authorizeRequests().
-                antMatchers("/payment/**").hasRole("USER").antMatchers("/pizza/**").hasRole("USER").and().httpBasic();
+                antMatchers("/payment/**").hasRole("USER")
+                .antMatchers("/pizza/**").hasRole("USER")
+                .and().httpBasic();
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 }

@@ -2,6 +2,7 @@ package ProjektiPizza.demo.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +13,6 @@ public class Payment {
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     private String id;
-
     private boolean status;
     @OneToMany(mappedBy = "payment")
     private List<Pizza> pizza = new ArrayList<>();

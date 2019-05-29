@@ -1,25 +1,16 @@
 package ProjektiPizza.demo.controller;
 
-import ProjektiPizza.demo.entity.User;
 import ProjektiPizza.demo.exception.UserException;
 import ProjektiPizza.demo.service.UserService;
 import ProjektiPizza.demo.transport.UserTransport;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/user")
 public class UserController {
-
     @Autowired
     private UserService userService;
 
@@ -34,13 +25,13 @@ public class UserController {
     }
 
     @PutMapping
-    public UserTransport update(@RequestBody User user) throws UserException {
-         return userService.save(user);
+    public UserTransport update(@RequestBody UserTransport userTransport) throws UserException {
+        return userService.save(userTransport);
     }
 
     @PostMapping
-    public UserTransport save(@RequestBody User user) throws UserException{
-         return userService.save(user);
+    public UserTransport save(@RequestBody UserTransport userTransport) throws UserException {
+        return userService.save(userTransport);
     }
 
     @DeleteMapping("/{id}")

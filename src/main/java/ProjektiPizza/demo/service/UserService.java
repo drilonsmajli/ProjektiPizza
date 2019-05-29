@@ -14,7 +14,6 @@ import java.util.stream.Collectors;
 
 @Service
 public class UserService {
-
     @Autowired
     private UserRepository userRepository;
 
@@ -30,18 +29,18 @@ public class UserService {
         return UserMapper.toTransport(byId.orElseThrow(() -> new UserException("None user found")));
     }
 
-    public UserTransport update(User user) throws UserException{
-        if(user == null){
+    public UserTransport update(UserTransport userTransport) throws UserException {
+        if (userTransport == null) {
             throw new UserException("User null");
         }
-        return UserMapper.toTransport(userRepository.save(UserMapper.toEntity(user)));
+        return UserMapper.toTransport(userRepository.save(UserMapper.toEntity(userTransport)));
     }
 
-    public UserTransport save(User user) throws UserException{
-        if(user == null){
+    public UserTransport save(UserTransport userTransport) throws UserException {
+        if (userTransport == null) {
             throw new UserException("User null");
         }
-        return UserMapper.toTransport(userRepository.save(UserMapper.toEntity(user)));
+        return UserMapper.toTransport(userRepository.save(UserMapper.toEntity(userTransport)));
     }
 
     public void delete(String id) throws UserException{

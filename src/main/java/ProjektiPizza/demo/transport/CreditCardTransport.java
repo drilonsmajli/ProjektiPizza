@@ -7,7 +7,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.List;
 
 public class CreditCardTransport {
-
     private String id;
     private long nrCc;
     @JsonIgnore

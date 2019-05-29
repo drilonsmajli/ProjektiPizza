@@ -9,7 +9,6 @@ import java.util.List;
 public class UserTransport {
     private String fullName;
     private String username;
-
     @JsonIgnore
     private String password;
     @JsonIgnore

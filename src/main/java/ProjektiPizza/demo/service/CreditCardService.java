@@ -29,11 +29,11 @@ public class CreditCardService {
         return CreditCardMapper.toTransport(byId.orElseThrow(() -> new CreditCardException("None CreditCard found")));
     }
 
-    public CreditCardTransport save(CreditCard creditCard) throws CreditCardException{
-        if(creditCard == null){
+    public CreditCardTransport save(CreditCardTransport creditCardTransport) throws CreditCardException {
+        if (creditCardTransport == null) {
             throw new CreditCardException("CreditCard null");
         }
-        return CreditCardMapper.toTransport(creditCardRepository.save(CreditCardMapper.toEntity(creditCard)));
+        return CreditCardMapper.toTransport(creditCardRepository.save(CreditCardMapper.toEntity(creditCardTransport)));
     }
 
     public void delete(String id) throws CreditCardException {

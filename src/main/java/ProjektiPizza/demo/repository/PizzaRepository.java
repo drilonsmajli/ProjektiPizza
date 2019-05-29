@@ -1,5 +1,4 @@
 package ProjektiPizza.demo.repository;
-
 import ProjektiPizza.demo.entity.Pizza;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

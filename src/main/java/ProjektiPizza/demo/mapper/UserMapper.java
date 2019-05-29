@@ -19,17 +19,17 @@ public class UserMapper {
         return userTransport;
     }
 
-    public static User toEntity(User user) {
-        if (user == null) {
+    public static User toEntity(UserTransport userTransport) {
+        if (userTransport == null) {
             return null;
         }
 
-        User user1 = new User();
-        user1.setFullName(user.getFullName());
-        user1.setUsername(user.getUsername());
-        user1.setPassword(user.getPassword());
-        user1.setCreditCard(user.getCreditCard());
-        user1.setPayment(user.getPayment());
-        return user1;
+        User user = new User();
+        user.setFullName(userTransport.getFullName());
+        user.setUsername(userTransport.getUsername());
+        user.setPassword(userTransport.getPassword());
+        user.setCreditCard(userTransport.getCreditCard());
+        user.setPayment(userTransport.getPayment());
+        return user;
     }
 }

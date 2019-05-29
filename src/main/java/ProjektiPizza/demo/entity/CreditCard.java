@@ -11,12 +11,10 @@ import java.util.List;
  */
 @Entity
 public class CreditCard {
-
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     private String id;
-
     private long nrCc;
     private String expDd;
     private int ccv;
@@ -27,7 +25,6 @@ public class CreditCard {
     @OneToMany(mappedBy = "creditCard")
     @JsonIgnore
     private List<Payment> payment;
-
 
     public String getId() {
         return id;
