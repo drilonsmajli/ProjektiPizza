@@ -11,7 +11,7 @@ import java.util.List;
  * @author Drilon
  */
 @RestController
-@RequestMapping("/pizza")
+@RequestMapping("/api/pizza")
 public class PizzaOrderController {
     @Autowired
     private PizzaService pizzaService;

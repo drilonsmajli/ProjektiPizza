@@ -3,13 +3,14 @@ package ProjektiPizza.demo.transport;
 import ProjektiPizza.demo.entity.CreditCard;
 import ProjektiPizza.demo.entity.Payment;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
 public class UserTransport {
     private String fullName;
     private String username;
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
     @JsonIgnore
     private List<CreditCard> creditCard;

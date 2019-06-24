@@ -6,6 +6,7 @@ import ProjektiPizza.demo.mapper.UserMapper;
 import ProjektiPizza.demo.repository.UserRepository;
 import ProjektiPizza.demo.transport.UserTransport;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,8 +15,11 @@ import java.util.stream.Collectors;
 
 @Service
 public class UserService {
+
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public List<UserTransport> getAll() {
         return userRepository.findAll().stream().map(UserMapper::toTransport).collect(Collectors.toList());
@@ -33,6 +37,7 @@ public class UserService {
         if (userTransport == null) {
             throw new UserException("User null");
         }
+        userTransport.setPassword(passwordEncoder.encode(userTransport.getPassword()));
         return UserMapper.toTransport(userRepository.save(UserMapper.toEntity(userTransport)));
     }
 
@@ -40,6 +45,7 @@ public class UserService {
         if (userTransport == null) {
             throw new UserException("User null");
         }
+        userTransport.setPassword(passwordEncoder.encode(userTransport.getPassword()));
         return UserMapper.toTransport(userRepository.save(UserMapper.toEntity(userTransport)));
     }
 
