@@ -33,7 +33,7 @@ public class PaymentService {
                 for(CreditCardTransport creditCardTransport:creditCardService.getAll()){
                     if(creditCardTransport.getNrCc()==card.getNrCc() && card.getBalance() >= p.getPrice()) {
                         if(p.getPrice()>card.getBalance()) {
-                            throw new PizzaException("Ska vllaqko");
+                            throw new PizzaException("You don't have balance to order");
                         }
                         card.setBalance(card.getBalance()-p.getPrice());
                         for(UserTransport userTransport:userService.getAll()){

@@ -16,6 +16,11 @@ public class UserTransport {
     private List<CreditCard> creditCard;
     @JsonIgnore
     private List<Payment> payment;
+    private String role;
+
+    public String getRole() {
+        return role;
+    }
 
     public String getFullName() {
         return fullName;
@@ -55,5 +60,9 @@ public class UserTransport {
 
     public void setPayment(List<Payment> payment) {
         this.payment = payment;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

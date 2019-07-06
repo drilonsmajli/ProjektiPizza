@@ -11,6 +11,7 @@ import javax.persistence.OneToMany;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+
 @Entity
 public class User implements UserDetails {
     private String fullName;
@@ -23,6 +24,7 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "user")
     @JsonIgnore
     private List<Payment> payment;
+    private String role;
 
     public void setUsername(String username) {
         this.username = username;
@@ -32,6 +34,13 @@ public class User implements UserDetails {
         return password;
     }
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
 
     public String getUsername() {
         return username;
@@ -89,4 +98,5 @@ public class User implements UserDetails {
     public void setPayment(List<Payment> payment) {
         this.payment = payment;
     }
+
 }

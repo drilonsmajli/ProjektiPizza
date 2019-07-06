@@ -3,9 +3,9 @@ package ProjektiPizza.demo.service;
 import ProjektiPizza.demo.entity.Pizza;
 import ProjektiPizza.demo.exception.PizzaException;
 import ProjektiPizza.demo.repository.PizzaRepository;
+import ProjektiPizza.demo.transport.UserTransport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +15,8 @@ public class PizzaService {
 
     @Autowired
     private PizzaRepository pizzaRepository;
+    @Autowired
+    UserService userService;
 
     public List<Pizza> getPizza() {
         List<Pizza> pizzas = new ArrayList<>();
@@ -22,19 +24,21 @@ public class PizzaService {
         return pizzas;
     }
 
-    @PostMapping("/create")
-    public Pizza createPizza(Pizza pizza) throws PizzaException {
-        if (pizza.getSize() != 30 && pizza.getSize() != 40 && pizza.getSize() != 60) {
-            throw new PizzaException("Size should be 30,40 or 60 cm");
-        }
-        return pizzaRepository.save(pizza);
-    }
-
     public Pizza addPizza(Pizza pizza) throws PizzaException {
-        if (pizza.getSize() != 30 && pizza.getSize() != 40 && pizza.getSize() != 60) {
-            throw new PizzaException("Size should be 30,40 or 60 cm");
+        for (UserTransport userTransport : userService.getAll()) {
+            if (userService.getAll().isEmpty()) {
+                throw new PizzaException("Create a user please");
+            }
+            if (userTransport.getRole().equals("ADMIN")) {
+                if (pizza.getSize() != 30 && pizza.getSize() != 40 && pizza.getSize() != 60) {
+                    throw new PizzaException("Size should be 30,40 or 60 cm");
+                }
+                return pizzaRepository.save(pizza);
+            } else {
+                throw new PizzaException("User not access");
+            }
         }
-        return pizzaRepository.save(pizza);
+        throw new PizzaException("You can't add pizza");
     }
 
     public Pizza getPrice(String type,double size) throws PizzaException {

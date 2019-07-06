@@ -15,6 +15,7 @@ public class UserMapper {
         userTransport.setCreditCard(user.getCreditCard());
         userTransport.setPayment(user.getPayment());
         userTransport.setPassword(user.getPassword());
+        userTransport.setRole(user.getRole());
 
         return userTransport;
     }
@@ -30,6 +31,7 @@ public class UserMapper {
         user.setPassword(userTransport.getPassword());
         user.setCreditCard(userTransport.getCreditCard());
         user.setPayment(userTransport.getPayment());
+        user.setRole(userTransport.getRole());
         return user;
     }
 }

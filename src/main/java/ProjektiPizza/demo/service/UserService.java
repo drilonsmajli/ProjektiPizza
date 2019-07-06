@@ -45,8 +45,11 @@ public class UserService {
         if (userTransport == null) {
             throw new UserException("User null");
         }
-        userTransport.setPassword(passwordEncoder.encode(userTransport.getPassword()));
-        return UserMapper.toTransport(userRepository.save(UserMapper.toEntity(userTransport)));
+        if (userTransport.getRole().equals("ADMIN")) {
+            return UserMapper.toTransport(userRepository.save(UserMapper.toEntity(userTransport)));
+        } else {
+            throw new UserException("You don't have access to create user");
+        }
     }
 
     public void delete(String id) throws UserException{
@@ -55,5 +58,4 @@ public class UserService {
         }
         userRepository.deleteById(id);
     }
-
 }
