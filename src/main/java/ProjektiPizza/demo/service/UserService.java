@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+
 @Service
 public class UserService {
 
@@ -45,11 +46,7 @@ public class UserService {
         if (userTransport == null) {
             throw new UserException("User null");
         }
-        if (userTransport.getRole().equals("ADMIN")) {
             return UserMapper.toTransport(userRepository.save(UserMapper.toEntity(userTransport)));
-        } else {
-            throw new UserException("You don't have access to create user");
-        }
     }
 
     public void delete(String id) throws UserException{

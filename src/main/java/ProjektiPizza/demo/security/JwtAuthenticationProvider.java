@@ -9,7 +9,6 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
-
 @Component
 public class JwtAuthenticationProvider extends AbstractUserDetailsAuthenticationProvider {
 
@@ -34,6 +33,7 @@ public class JwtAuthenticationProvider extends AbstractUserDetailsAuthentication
         user.setFullName(user.getFullName());
         user.setUsername(user.getUsername());
         user.setPassword(user.getPassword());
+        user.setRole(user.getRole());
         return user;
     }
 

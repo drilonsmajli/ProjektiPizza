@@ -12,8 +12,6 @@ import org.springframework.stereotype.Component;
 public class JwtValidator {
     Logger log = LoggerFactory.getLogger(JwtSuccessHandler.class);
 
-    Constants constants = new Constants();
-
     public User validate(String token) {
 
 
@@ -29,6 +27,7 @@ public class JwtValidator {
             user.setUsername(body.getSubject());
             user.setFullName(body.getSubject());
             user.setPassword(body.getSubject());
+            user.setRole(body.getSubject());
         } catch (Exception e) {
             log.info(e.getMessage());
         }
